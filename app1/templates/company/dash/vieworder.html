@@ -1,0 +1,44 @@
+{% extends 'company/dash/base.html' %}
+{% load static %}
+{% block NewContent %}
+
+<div class="row">
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">order details</h4>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Sr. No.</th>
+                  <th>customer name</th>
+                  <th>product name</th>
+                  <th>Price</th>
+                  <th>QTY</th>
+                  <th>order date</th>
+                  <th>status</th>
+                </tr>
+              </thead>
+              <tbody>
+                    {% for i in cord reversed %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{i.cust.cust_nm}}</td>
+                            <td>{{ i.prod.pro_nm }}</td>
+                            <td>{{ i.tot_price }}</td>
+                            <td>{{ i.qty }}</td>
+                            <td>{{i.order_date}}</td>
+                            <td>
+                            <a href="{% url 'yesorder' i.id %}" class="badge badge-danger">accept</a>
+                            <a href="{% url 'noorder' i.id %}" class="badge badge-info">delete</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+</div>
+
+{% endblock NewContent %}
